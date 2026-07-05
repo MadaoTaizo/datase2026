@@ -145,24 +145,24 @@
     <h3>Upload Foto</h3>
     <p style="font-size: 14px; color: #555;">Silakan upload foto KK, foto Rumah, dan foto lainnya.</p>
     
-    <!-- Foto KK -->
-    <div class="upload-area" id="drop-area-kk" onclick="document.getElementById('fileInput-kk').click()">
+    <!-- Foto KK (ID Input diubah jadi unik) -->
+    <div class="upload-area" id="drop-area-kk" onclick="document.getElementById('fileInputKK').click()">
         <strong>Klik atau Drag & Drop Foto KK di sini</strong><br>
-        <input type="file" id="fileInput-kk" accept="image/*" multiple style="display:none;">
+        <input type="file" id="fileInputKK" accept="image/*" multiple style="display:none;">
     </div>
     <div class="preview-container" id="preview-kk"></div>
 
-    <!-- Foto Rumah -->
-    <div class="upload-area" id="drop-area-rumah" onclick="document.getElementById('fileInput-rumah').click()">
+    <!-- Foto Rumah (ID Input diubah jadi unik) -->
+    <div class="upload-area" id="drop-area-rumah" onclick="document.getElementById('fileInputRumah').click()">
         <strong>Klik atau Drag & Drop Foto Rumah di sini</strong><br>
-        <input type="file" id="fileInput-rumah" accept="image/*" multiple style="display:none;">
+        <input type="file" id="fileInputRumah" accept="image/*" multiple style="display:none;">
     </div>
     <div class="preview-container" id="preview-rumah"></div>
 
-    <!-- Foto Lainnya -->
-    <div class="upload-area" id="drop-area-lain" onclick="document.getElementById('fileInput-lain').click()">
+    <!-- Foto Lainnya (ID Input diubah jadi unik) -->
+    <div class="upload-area" id="drop-area-lain" onclick="document.getElementById('fileInputLain').click()">
         <strong>Klik atau Drag & Drop Foto Lainnya di sini</strong><br>
-        <input type="file" id="fileInput-lain" accept="image/*" multiple style="display:none;">
+        <input type="file" id="fileInputLain" accept="image/*" multiple style="display:none;">
     </div>
     <div class="preview-container" id="preview-lain"></div>
 
@@ -173,12 +173,18 @@
 </div>
 
 <script>
-    // ================= UPLOAD LOGIC =================
+    // ================= DEFINE VARIABLES (DIPINDAHKAN KE PALING ATAS) =================
+    // GANTI URL DI BAWAH INI DENGAN URL WEB APP ANDA
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDz2ia2P_-D-leLPGi_9676A6oEx-MSwpZ54niIFmbP9oSEfhtqSUFdzGWNl-DI_45dA/exec"; 
     let uploadedFiles = [];
 
+    // ================= UPLOAD LOGIC =================
     function setupUpload(inputId, previewId, category) {
         const input = document.getElementById(inputId);
         const preview = document.getElementById(previewId);
+
+        // CEK APAKAH ELEMENT INPUT ADA (MENCEGAH ERROR NULL)
+        if(!input || !preview) return; 
 
         input.addEventListener('change', function(e) {
             handleFiles(this.files, preview, category);
@@ -187,6 +193,8 @@
 
         // Drag and Drop
         const dropArea = document.getElementById('drop-area-' + category);
+        if(!dropArea) return;
+
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, preventDefaults, false);
         });
@@ -234,16 +242,13 @@
         btn.parentElement.remove();
     }
 
-    // Init uploads
-    setupUpload('fileInput-kk', 'preview-kk', 'KK');
-    setupUpload('fileInput-rumah', 'preview-rumah', 'Rumah');
-    setupUpload('fileInput-lain', 'preview-lain', 'Lainnya');
+    // Init uploads (NAMA ID INPUT SUDAH DIPERBAIKI)
+    setupUpload('fileInputKK', 'preview-kk', 'kk');
+    setupUpload('fileInputRumah', 'preview-rumah', 'rumah');
+    setupUpload('fileInputLain', 'preview-lain', 'lain');
 
 
     // ================= SUBMIT LOGIC =================
-    // GANTI URL DI BAWAH INI DENGAN URL WEB APP ANDA
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDz2ia2P_-D-leLPGi_9676A6oEx-MSwpZ54niIFmbP9oSEfhtqSUFdzGWNl-DI_45dA/exec"; 
-
     function submitForm() {
         const btn = document.getElementById('submitBtn');
         const loading = document.getElementById('loading');
