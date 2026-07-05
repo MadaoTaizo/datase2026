@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Sensus BPS Lubuklinggau</title>
+    <title>Formulir Sensus BPS Lubuklinggau - Usaha</title>
     <style>
         :root {
             --primary: #0d6efd;
@@ -12,19 +12,12 @@
             --text: #212529;
             --border: #343a40;
             --input-border: #ced4da;
+            --bg-highlight: #fff3cd;
         }
         * { box-sizing: border-box; }
         
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0; padding: 15px;
-        }
-        .container {
-            max-width: 1000px; margin: 0 auto; background: var(--card);
-            padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
+        body { font-family: 'Times New Roman', Times, serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; }
+        .container { max-width: 1000px; margin: 0 auto; background: var(--card); padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
 
         /* HEADER INSTANSI */
         .header-instansi { display: flex; align-items: center; gap: 15px; border-bottom: 3px double #000; padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -42,10 +35,7 @@
         .col { flex: 1; min-width: 180px; }
         label { display: block; font-weight: bold; margin-bottom: 4px; font-size: 0.95rem; }
         
-        input, select, textarea {
-            width: 100%; padding: 8px 10px; border: 1px solid var(--input-border); border-radius: 4px;
-            box-sizing: border-box; font-family: inherit; font-size: 0.95rem; background: #fcfcfc;
-        }
+        input, select { width: 100%; padding: 8px 10px; border: 1px solid var(--input-border); border-radius: 4px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; background: #fcfcfc; }
         input:focus, select:focus { outline: 2px solid var(--primary); border-color: transparent; }
 
         /* --- TABEL (Tampilan Desktop) --- */
@@ -72,51 +62,32 @@
         .btn-wa { background-color: #25D366; color: white; border: none; padding: 15px 20px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 30px; width: 100%; transition: 0.3s; }
         .btn-wa:hover { background-color: #128C7E; transform: scale(1.01); }
 
-        /* --- RESPONSIVE MOBILE (KARTU CERDAS) --- */
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
             .header-instansi { flex-direction: column; text-align: center; }
-            .header-instansi .logo-placeholder { width: 60px; height: 60px; }
             .container { padding: 15px; } .row { flex-direction: column; }
             
-            /* Ubah Tabel Menjadi Kartu di HP */
             table, thead, tbody, th, td, tr { display: block; }
-            
-            /* Sembunyikan Header Tabel */
             thead tr { position: absolute; top: -9999px; left: -9999px; }
             
-            /* Setiap Baris jadi Kartu */
-            tr { 
-                border: 1px solid #000; border-radius: 6px; margin-bottom: 15px; 
-                padding: 12px; background: #fcfcfc; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            }
-            
-            /* Setiap Sel jadi Baris Label + Input */
-            td { 
-                border: none; border-bottom: 1px solid #e9ecef; 
-                padding: 8px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px;
-            }
+            tr { border: 1px solid #000; border-radius: 6px; margin-bottom: 15px; padding: 12px; background: #fcfcfc; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+            td { border: none; border-bottom: 1px solid #e9ecef; padding: 8px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
             td:last-child { border-bottom: none; }
             
-            /* Ubah judul kolom jadi Label (Menggunakan Attribute Data-Label) */
-            td::before { 
-                content: attr(data-label); 
-                font-weight: bold; text-transform: uppercase; color: #495057;
-                flex-shrink: 0; width: 35%; font-size: 0.75rem;
-            }
-            
-            /* Input menyesuaikan sisa ruang */
+            td::before { content: attr(data-label); font-weight: bold; text-transform: uppercase; color: #495057; flex-shrink: 0; width: 35%; font-size: 0.75rem; }
             .table-input { width: 65%; text-align: right; border-bottom: 1px solid #ced4da; padding: 2px 0; }
             .table-input:focus { border-bottom: 2px solid var(--primary); }
             
-            /* Tombol Hapus di HP */
             td:last-child { justify-content: flex-end; }
             .btn-remove-row { font-size: 0.8rem; padding: 4px 12px; }
             
-            /* Pengeluaran Table Khusus */
             #pengeluaran-table tr td { width: 100%; justify-content: space-between; }
             #pengeluaran-table tr td::before { width: 45%; }
             #pengeluaran-table .table-input { width: 50%; }
         }
+
+        /* Style untuk Hasil Perhitungan Otomatis */
+        .calc-result { background: var(--bg-highlight); font-weight: bold; padding: 4px 8px; border-radius: 4px; display: inline-block; min-width: 80px; text-align: right; }
     </style>
 </head>
 <body>
@@ -133,7 +104,7 @@
         </div>
     </div>
 
-    <h2 style="text-align: center; border: none; margin: 0 0 20px 0;">FORMULIR PENDATAAN KELUARGA</h2>
+    <h2 style="text-align: center; border: none; margin: 0 0 20px 0;">FORMULIR PENDATAAN KELUARGA & USAHA</h2>
     
     <!-- IDENTITAS -->
     <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px;">
@@ -157,23 +128,67 @@
         </div>
     </div>
 
-    <!-- 1. USAHA -->
-    <h3>LIST USAHA YANG DIPUNYA <button class="btn-table-action" onclick="tambahBaris('usaha')">+ Tambah Usaha</button></h3>
+    <!-- 1. USAHA + LAPORAN KEUANGAN -->
+    <h3 style="border-bottom: 2px solid #000;">
+        LIST USAHA & LAPORAN KEUANGAN
+        <button class="btn-table-action" onclick="tambahBaris('usaha')">+ Tambah Usaha</button>
+    </h3>
+    <p style="font-size: 0.85rem; margin-top: -5px; color: #495057; font-style: italic;">*Masukkan nominal dalam Rupiah (Rp) tanpa titik/koma, misal: 5000000</p>
+    
     <table>
-        <thead><tr><th>No</th><th>List Usaha</th><th>Sejak Tahun</th><th>Luas Tanah</th><th>Aksi</th></tr></thead>
-        <tbody id="tbody-usaha">
+        <thead>
             <tr>
-                <td data-label="No">1</td>
-                <td data-label="List Usaha"><input class="table-input" type="text" name="usaha_nama[]"></td>
-                <td data-label="Sejak Tahun"><input class="table-input" type="number" name="usaha_tahun[]"></td>
-                <td data-label="Luas Tanah"><input class="table-input" type="number" name="usaha_luas[]"></td>
-                <td data-label="Aksi"></td>
+                <th rowspan="2" style="width: 30px;">No</th>
+                <th rowspan="2" style="width: 25%;">Nama Usaha</th>
+                <th colspan="5">Rincian Pengeluaran Bulanan (Rp)</th>
+                <th rowspan="2" style="width: 12%;">Pendapatan Kotor / Bulan (Rp)</th>
+                <th rowspan="2" style="width: 12%;">Total Pengeluaran / Bulan</th>
+                <th rowspan="2" style="width: 12%;">Bersih / Bulan</th>
+                <th rowspan="2" style="width: 12%;">Bersih / Tahun</th>
+                <th rowspan="2" style="width: 40px;">Aksi</th>
             </tr>
             <tr>
+                <th style="font-size: 0.75rem;">Gaji Karyawan</th>
+                <th style="font-size: 0.75rem;">Biaya Produksi</th>
+                <th style="font-size: 0.75rem;">Biaya Barang</th>
+                <th style="font-size: 0.75rem;">Operasional</th>
+                <th style="font-size: 0.75rem;">Non-Operasional</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-usaha">
+            <tr class="usaha-row">
+                <td data-label="No">1</td>
+                <td data-label="Nama Usaha"><input class="table-input usaha-nama" type="text" name="usaha_nama[]"></td>
+                
+                <td data-label="Gaji Karyawan"><input class="table-input u-gaji" type="number" name="usaha_gaji[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Biaya Produksi"><input class="table-input u-produksi" type="number" name="usaha_produksi[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Biaya Barang"><input class="table-input u-barang" type="number" name="usaha_barang[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Operasional"><input class="table-input u-operasional" type="number" name="usaha_operasional[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Non-Operasional"><input class="table-input u-nonop" type="number" name="usaha_nonop[]" oninput="hitungUsaha(this)"></td>
+
+                <td data-label="Pendapatan Kotor"><input class="table-input u-omzet" type="number" name="usaha_omzet[]" oninput="hitungUsaha(this)"></td>
+                
+                <!-- Hasil Kalkulasi Otomatis (Readonly) -->
+                <td data-label="Total Pengeluaran"><span class="calc-result u-total-pengeluaran">0</span></td>
+                <td data-label="Bersih/Bulan"><span class="calc-result u-bersih-bulan">0</span></td>
+                <td data-label="Bersih/Tahun"><span class="calc-result u-bersih-tahun">0</span></td>
+                <td data-label="Aksi"></td>
+            </tr>
+            <tr class="usaha-row">
                 <td data-label="No">2</td>
-                <td data-label="List Usaha"><input class="table-input" type="text" name="usaha_nama[]"></td>
-                <td data-label="Sejak Tahun"><input class="table-input" type="number" name="usaha_tahun[]"></td>
-                <td data-label="Luas Tanah"><input class="table-input" type="number" name="usaha_luas[]"></td>
+                <td data-label="Nama Usaha"><input class="table-input usaha-nama" type="text" name="usaha_nama[]"></td>
+                
+                <td data-label="Gaji Karyawan"><input class="table-input u-gaji" type="number" name="usaha_gaji[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Biaya Produksi"><input class="table-input u-produksi" type="number" name="usaha_produksi[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Biaya Barang"><input class="table-input u-barang" type="number" name="usaha_barang[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Operasional"><input class="table-input u-operasional" type="number" name="usaha_operasional[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Non-Operasional"><input class="table-input u-nonop" type="number" name="usaha_nonop[]" oninput="hitungUsaha(this)"></td>
+
+                <td data-label="Pendapatan Kotor"><input class="table-input u-omzet" type="number" name="usaha_omzet[]" oninput="hitungUsaha(this)"></td>
+                
+                <td data-label="Total Pengeluaran"><span class="calc-result u-total-pengeluaran">0</span></td>
+                <td data-label="Bersih/Bulan"><span class="calc-result u-bersih-bulan">0</span></td>
+                <td data-label="Bersih/Tahun"><span class="calc-result u-bersih-tahun">0</span></td>
                 <td data-label="Aksi"></td>
             </tr>
         </tbody>
@@ -284,6 +299,41 @@
 </div>
 
 <script>
+    // --- 1. FUNGSI KALKULASI USAHA OTOMATIS (REAL-TIME) ---
+    function hitungUsaha(inputElement) {
+        // Cari baris (tr) tempat input ini berada
+        let row = inputElement.closest('tr');
+        
+        // Ambil semua nilai input di baris ini
+        let gaji = parseFloat(row.querySelector('.u-gaji').value) || 0;
+        let produksi = parseFloat(row.querySelector('.u-produksi').value) || 0;
+        let barang = parseFloat(row.querySelector('.u-barang').value) || 0;
+        let operasional = parseFloat(row.querySelector('.u-operasional').value) || 0;
+        let nonop = parseFloat(row.querySelector('.u-nonop').value) || 0;
+        let omzet = parseFloat(row.querySelector('.u-omzet').value) || 0;
+
+        // 1. Hitung Total Pengeluaran Bulanan
+        let totalPengeluaran = gaji + produksi + barang + operasional + nonop;
+
+        // 2. Hitung Pendapatan Bersih 1 Bulan
+        let bersihBulan = omzet - totalPengeluaran;
+
+        // 3. Hitung Pendapatan Bersih 1 Tahun
+        let bersihTahun = bersihBulan * 12;
+
+        // Tampilkan hasil ke dalam span (dengan format mata uang Rupiah agar rapi)
+        row.querySelector('.u-total-pengeluaran').innerText = formatRupiah(totalPengeluaran);
+        row.querySelector('.u-bersih-bulan').innerText = formatRupiah(bersihBulan);
+        row.querySelector('.u-bersih-tahun').innerText = formatRupiah(bersihTahun);
+    }
+
+    // Fungsi pembantu format angka ke Rupiah
+    function formatRupiah(angka) {
+        if (angka === 0) return "0";
+        return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // --- 2. FUNGSI FOTO ---
     function previewFoto(input, previewId) {
         let preview = document.getElementById(previewId);
         if (input.files && input.files[0]) {
@@ -293,17 +343,31 @@
         }
     }
 
+    // --- 3. FUNGSI TAMBAH BARIS ---
     function tambahBaris(tipe) {
         let tbody = document.getElementById(`tbody-${tipe}`);
         let rowCount = tbody.rows.length + 1;
         let newRow = document.createElement('tr');
 
         if (tipe === 'usaha') {
+            // Tambahkan class "usaha-row" agar fungsi kalkulasi bisa mendeteksinya
+            newRow.className = 'usaha-row'; 
             newRow.innerHTML = `
                 <td data-label="No">${rowCount}</td>
-                <td data-label="List Usaha"><input class="table-input" type="text" name="usaha_nama[]"></td>
-                <td data-label="Sejak Tahun"><input class="table-input" type="number" name="usaha_tahun[]"></td>
-                <td data-label="Luas Tanah"><input class="table-input" type="number" name="usaha_luas[]"></td>
+                <td data-label="Nama Usaha"><input class="table-input usaha-nama" type="text" name="usaha_nama[]"></td>
+                
+                <td data-label="Gaji Karyawan"><input class="table-input u-gaji" type="number" name="usaha_gaji[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Biaya Produksi"><input class="table-input u-produksi" type="number" name="usaha_produksi[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Biaya Barang"><input class="table-input u-barang" type="number" name="usaha_barang[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Operasional"><input class="table-input u-operasional" type="number" name="usaha_operasional[]" oninput="hitungUsaha(this)"></td>
+                <td data-label="Non-Operasional"><input class="table-input u-nonop" type="number" name="usaha_nonop[]" oninput="hitungUsaha(this)"></td>
+
+                <td data-label="Pendapatan Kotor"><input class="table-input u-omzet" type="number" name="usaha_omzet[]" oninput="hitungUsaha(this)"></td>
+                
+                <td data-label="Total Pengeluaran"><span class="calc-result u-total-pengeluaran">0</span></td>
+                <td data-label="Bersih/Bulan"><span class="calc-result u-bersih-bulan">0</span></td>
+                <td data-label="Bersih/Tahun"><span class="calc-result u-bersih-tahun">0</span></td>
+                
                 <td data-label="Aksi"><button class="btn-remove-row" onclick="hapusBaris(this)">✕ Hapus</button></td>
             `;
         } else if (tipe === 'anggota') {
@@ -345,6 +409,7 @@
         }
     }
 
+    // --- 4. FUNGSI KIRIM WA ---
     function getVal(id) { let el = document.getElementById(id); return el ? (el.value.trim() || '-') : '-'; }
 
     function kirimKeWhatsApp() {
@@ -355,15 +420,37 @@
         message += `Nama KK: ${getVal('nama_kk')}\n`;
         message += `Telepon: ${getVal('telepon')}\n\n`;
 
-        message += `*🏪 USAHA*\n`;
-        let uNama = document.getElementsByName('usaha_nama[]');
-        let uTahun = document.getElementsByName('usaha_tahun[]');
-        let uLuas = document.getElementsByName('usaha_luas[]');
-        for(let i=0; i<uNama.length; i++) {
-            message += `${i+1}. ${uNama[i].value || '-'} (${uTahun[i].value || '-'} - ${uLuas[i].value || '-'}m²)\n`;
-        }
+        // --- USAHA (Dengan Kalkulasi) ---
+        message += `*🏪 LAPORAN USAHA*\n`;
+        let rowsUsaha = document.querySelectorAll('#tbody-usaha .usaha-row');
+        rowsUsaha.forEach((row, index) => {
+            let nama = row.querySelector('.usaha-nama').value || '-';
+            let gaji = row.querySelector('.u-gaji').value || '0';
+            let produksi = row.querySelector('.u-produksi').value || '0';
+            let barang = row.querySelector('.u-barang').value || '0';
+            let operasional = row.querySelector('.u-operasional').value || '0';
+            let nonop = row.querySelector('.u-nonop').value || '0';
+            let omzet = row.querySelector('.u-omzet').value || '0';
+            
+            let totalPeng = row.querySelector('.u-total-pengeluaran').innerText;
+            let bersihBln = row.querySelector('.u-bersih-bulan').innerText;
+            let bersihThn = row.querySelector('.u-bersih-tahun').innerText;
+
+            message += `\n[${index+1}] ${nama}\n`;
+            message += `  Gaji Karyawan: Rp${gaji}\n`;
+            message += `  Biaya Produksi: Rp${produksi}\n`;
+            message += `  Biaya Barang: Rp${barang}\n`;
+            message += `  Operasional: Rp${operasional}\n`;
+            message += `  Non-Operasional: Rp${nonop}\n`;
+            message += `  Omzet/Bulan: Rp${omzet}\n`;
+            message += `  ────────────────────────\n`;
+            message += `  *Total Pengeluaran/Bulan: Rp${totalPeng}*\n`;
+            message += `  *Bersih 1 Bulan: Rp${bersihBln}*\n`;
+            message += `  *Bersih 1 Tahun: Rp${bersihThn}*\n`;
+        });
         message += `\n`;
 
+        // --- ANGGOTA ---
         message += `*👨‍👩‍👧‍👦 ANGGOTA KELUARGA*\n`;
         let aNama = document.getElementsByName('anggota_nama[]');
         let aHub = document.getElementsByName('anggota_hub[]');
@@ -376,6 +463,7 @@
         }
         message += `\n`;
 
+        // --- RUMAH ---
         message += `*🏠 RUMAH*\n`;
         message += `Status: ${document.getElementById('status_kepemilikan').value}\n`;
         message += `Lantai: ${getVal('luas_lantai')}, Bahan: ${getVal('bahan_lantai')}\n`;
@@ -383,14 +471,17 @@
         message += `WC: ${getVal('wc')}, Air: ${getVal('sumber_air')}\n`;
         message += `Penerangan: ${getVal('sumber_penerangan')} (${getVal('ampere')}, ${getVal('id_pelanggan')})\n\n`;
 
+        // --- PENGELUARAN ---
         message += `*💰 MINGGUAN*\n`;
         message += `Beras: ${getVal('beras')}, Sayur: ${getVal('sayur')}, Bumbu: ${getVal('bumbu')}, Rokok: ${getVal('rokok')}, Jajan: ${getVal('jajan_anak')}\n\n`;
         message += `*💰 BULANAN*\n`;
         message += `Listrik: ${getVal('listrik')}, Internet: ${getVal('internet')}, Bensin: ${getVal('bensin')}, Gas: ${getVal('gas')}, Sabun: ${getVal('sabun')}, SPP: ${getVal('spp')}, Obat: ${getVal('obat')}\n\n`;
 
+        // --- TAHUNAN ---
         message += `*📅 TAHUNAN*\n`;
         message += `BPJS: ${getVal('bpjs')}, Pajak Bangunan: ${getVal('pajak_bangunan')}, Pajak Lahan: ${getVal('pajak_lahan')}, Lebaran: ${getVal('lebaran')}\n\n`;
 
+        // --- ASET ---
         message += `*🚗 ASET*\n`;
         let asNama = document.getElementsByName('aset_nama[]');
         let asJml = document.getElementsByName('aset_jml[]');
