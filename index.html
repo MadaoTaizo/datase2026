@@ -16,7 +16,6 @@
         th, td { border: 1px solid #000; padding: 8px; text-align: left; }
         th { background-color: #eee; }
         
-        /* Upload Foto Styles */
         .upload-area { border: 2px dashed #ccc; padding: 20px; text-align: center; margin: 10px 0; cursor: pointer; border-radius: 5px; background: #fafafa; }
         .upload-area:hover { border-color: #333; }
         .preview-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; }
@@ -46,12 +45,8 @@
     <table>
         <thead><tr><th>List Usaha</th><th>Sejak Tahun</th><th>Luas Tanah</th></tr></thead>
         <tbody>
-            <tr>
-                <td><input type="text" id="usaha_1_nama"></td><td><input type="text" id="usaha_1_tahun"></td><td><input type="text" id="usaha_1_luas"></td>
-            </tr>
-            <tr>
-                <td><input type="text" id="usaha_2_nama"></td><td><input type="text" id="usaha_2_tahun"></td><td><input type="text" id="usaha_2_luas"></td>
-            </tr>
+            <tr><td><input type="text" id="usaha_1_nama"></td><td><input type="text" id="usaha_1_tahun"></td><td><input type="text" id="usaha_1_luas"></td></tr>
+            <tr><td><input type="text" id="usaha_2_nama"></td><td><input type="text" id="usaha_2_tahun"></td><td><input type="text" id="usaha_2_luas"></td></tr>
         </tbody>
     </table>
 
@@ -145,27 +140,23 @@
     <h3>Upload Foto</h3>
     <p style="font-size: 14px; color: #555;">Silakan upload foto KK, foto Rumah, dan foto lainnya.</p>
     
-    <!-- Foto KK (ID Input diubah jadi unik) -->
     <div class="upload-area" id="drop-area-kk" onclick="document.getElementById('fileInputKK').click()">
         <strong>Klik atau Drag & Drop Foto KK di sini</strong><br>
         <input type="file" id="fileInputKK" accept="image/*" multiple style="display:none;">
     </div>
     <div class="preview-container" id="preview-kk"></div>
 
-    <!-- Foto Rumah (ID Input diubah jadi unik) -->
     <div class="upload-area" id="drop-area-rumah" onclick="document.getElementById('fileInputRumah').click()">
         <strong>Klik atau Drag & Drop Foto Rumah di sini</strong><br>
         <input type="file" id="fileInputRumah" accept="image/*" multiple style="display:none;">
     </div>
     <div class="preview-container" id="preview-rumah"></div>
 
-    <!-- Foto Lainnya (ID Input diubah jadi unik) -->
     <div class="upload-area" id="drop-area-lain" onclick="document.getElementById('fileInputLain').click()">
         <strong>Klik atau Drag & Drop Foto Lainnya di sini</strong><br>
         <input type="file" id="fileInputLain" accept="image/*" multiple style="display:none;">
     </div>
     <div class="preview-container" id="preview-lain"></div>
-
 
     <button class="submit" id="submitBtn" onclick="submitForm()">Simpan Data & Foto</button>
     <div id="loading">Mengirim data... Mohon tunggu (foto sedang diupload ke Drive)</div>
@@ -173,25 +164,20 @@
 </div>
 
 <script>
-    // ================= DEFINE VARIABLES (DIPINDAHKAN KE PALING ATAS) =================
-    // GANTI URL DI BAWAH INI DENGAN URL WEB APP ANDA
+    // GANTI URL DI BAWAH INI DENGAN URL WEB APP BARU HASIL DEPLOY ANDA
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDz2ia2P_-D-leLPGi_9676A6oEx-MSwpZ54niIFmbP9oSEfhtqSUFdzGWNl-DI_45dA/exec"; 
     let uploadedFiles = [];
 
-    // ================= UPLOAD LOGIC =================
     function setupUpload(inputId, previewId, category) {
         const input = document.getElementById(inputId);
         const preview = document.getElementById(previewId);
-
-        // CEK APAKAH ELEMENT INPUT ADA (MENCEGAH ERROR NULL)
         if(!input || !preview) return; 
 
         input.addEventListener('change', function(e) {
             handleFiles(this.files, preview, category);
-            this.value = ''; // reset input
+            this.value = '';
         });
 
-        // Drag and Drop
         const dropArea = document.getElementById('drop-area-' + category);
         if(!dropArea) return;
 
@@ -213,15 +199,9 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const base64 = e.target.result;
-                const fileObj = {
-                    namaFile: file.name,
-                    mimeType: file.type,
-                    base64: base64,
-                    keterangan: category // KK, Rumah, atau Lainnya
-                };
+                const fileObj = { namaFile: file.name, mimeType: file.type, base64: base64, keterangan: category };
                 uploadedFiles.push(fileObj);
 
-                // Show preview
                 const div = document.createElement('div');
                 div.className = 'preview-item';
                 div.innerHTML = `
@@ -236,19 +216,14 @@
     }
 
     function removeFile(btn, base64) {
-        // Hapus dari array
         uploadedFiles = uploadedFiles.filter(f => f.base64 !== base64);
-        // Hapus dari DOM
         btn.parentElement.remove();
     }
 
-    // Init uploads (NAMA ID INPUT SUDAH DIPERBAIKI)
     setupUpload('fileInputKK', 'preview-kk', 'kk');
     setupUpload('fileInputRumah', 'preview-rumah', 'rumah');
     setupUpload('fileInputLain', 'preview-lain', 'lain');
 
-
-    // ================= SUBMIT LOGIC =================
     function submitForm() {
         const btn = document.getElementById('submitBtn');
         const loading = document.getElementById('loading');
@@ -258,7 +233,6 @@
         loading.style.display = 'block';
         msg.innerHTML = '';
 
-        // Kumpulkan semua data JSON
         const data = {
             nomor_bangunan: document.getElementById('nomor_bangunan').value,
             nomor_urut_kk: document.getElementById('nomor_urut_kk').value,
@@ -318,21 +292,21 @@
             timestamp: new Date().toLocaleString()
         };
 
-        // GUNAKAN FORM DATA (AMAN UNTUK FOTO BESAR)
         const formData = new FormData();
         formData.append('data', JSON.stringify(data));
 
+        // PERBAIKAN FETCH UNTUK MENGATASI CORS
         fetch(SCRIPT_URL, {
             method: 'POST',
-            body: formData // Mengirim sebagai FormData, bukan JSON string
+            mode: 'no-cors', // Tambahkan ini agar browser tidak memblokir
+            body: formData 
         })
-        .then(response => response.text())
-        .then(result => {
+        .then(() => {
+            // Karena mode 'no-cors', response tidak bisa dibaca. Kita anggap sukses jika tidak error.
             document.getElementById('loading').style.display = 'none';
             document.getElementById('responseMsg').style.color = 'green';
-            document.getElementById('responseMsg').innerHTML = "Data dan foto berhasil dikirim ke Google Spreadsheet!";
+            document.getElementById('responseMsg').innerHTML = "Data berhasil dikirim ke Google Spreadsheet! (Cek sheet Anda)";
             document.getElementById('submitBtn').disabled = false;
-            // Reset form
             document.querySelectorAll('input').forEach(i => i.value = '');
             uploadedFiles = [];
             document.querySelectorAll('.preview-item').forEach(el => el.remove());
@@ -341,7 +315,8 @@
             console.error('Error:', error);
             document.getElementById('loading').style.display = 'none';
             document.getElementById('responseMsg').style.color = 'red';
-            document.getElementById('responseMsg').innerHTML = "Terjadi kesalahan saat mengirim data: " + error;
+            // Jika gagal total, tampilkan pesan error
+            document.getElementById('responseMsg').innerHTML = "Gagal mengirim data. Pastikan URL Apps Script benar dan sudah di-deploy ulang.";
             document.getElementById('submitBtn').disabled = false;
         });
     }
