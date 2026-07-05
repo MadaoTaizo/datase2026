@@ -241,7 +241,8 @@
 
 
     // ================= SUBMIT LOGIC =================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycAfsy3SE7Jfno7EepxIwCbBtD_THzCn7is1mjXW7UTQB53X4DfV9r3nz7jvuVjMF0mA/exec"; // GANTI INI DENGAN URL WEB APP ANDA DARI GOOGLE APPS SCRIPT
+    // GANTI URL DI BAWAH INI DENGAN URL WEB APP ANDA
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDz2ia2P_-D-leLPGi_9676A6oEx-MSwpZ54niIFmbP9oSEfhtqSUFdzGWNl-DI_45dA/exec"; 
 
     function submitForm() {
         const btn = document.getElementById('submitBtn');
@@ -252,7 +253,7 @@
         loading.style.display = 'block';
         msg.innerHTML = '';
 
-        // Kumpulkan semua data
+        // Kumpulkan semua data JSON
         const data = {
             nomor_bangunan: document.getElementById('nomor_bangunan').value,
             nomor_urut_kk: document.getElementById('nomor_urut_kk').value,
@@ -312,17 +313,19 @@
             timestamp: new Date().toLocaleString()
         };
 
+        // GUNAKAN FORM DATA (AMAN UNTUK FOTO BESAR)
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(data));
+
         fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Penting untuk CORS di Google Apps Script
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: formData // Mengirim sebagai FormData, bukan JSON string
         })
-        .then(response => {
-            // Karena mode no-cors, response tidak bisa dibaca textnya dengan mudah, tapi kita anggap sukses jika tidak error network.
+        .then(response => response.text())
+        .then(result => {
             document.getElementById('loading').style.display = 'none';
             document.getElementById('responseMsg').style.color = 'green';
-            document.getElementById('responseMsg').innerHTML = "Data dan foto berhasil dikirim ke Google Spreadsheet & Google Drive!";
+            document.getElementById('responseMsg').innerHTML = "Data dan foto berhasil dikirim ke Google Spreadsheet!";
             document.getElementById('submitBtn').disabled = false;
             // Reset form
             document.querySelectorAll('input').forEach(i => i.value = '');
