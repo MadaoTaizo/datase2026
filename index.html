@@ -3,243 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Data Keluarga</title>
+    <title>Formulir Sensus BPS Kota Lubuklinggau</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --bg: #f3f4f6;
+            --primary: #0d6efd;
+            --bg: #e9ecef;
             --card: #ffffff;
-            --text: #1f2937;
-            --border: #d1d5db;
+            --text: #212529;
+            --border: #343a40;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Times New Roman', Times, serif; /* Font resmi kertas */
             background-color: var(--bg);
             color: var(--text);
-            margin: 0;
-            padding: 20px;
+            margin: 0; padding: 20px;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card);
-            padding: 20px 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        h2, h3 {
-            color: var(--primary);
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 10px;
-            margin-top: 30px;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        h2 { font-size: 1.4rem; }
-        
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-            gap: 15px;
-        }
-        .col { flex: 1; min-width: 200px; }
-        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 1rem;
-            transition: 0.2s;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-        }
-        
-        /* Layout Tabel seperti Foto */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
-        th, td { border: 1px solid #9ca3af; padding: 8px 10px; text-align: left; }
-        th { background: #f9fafb; font-weight: 600; }
-        .table-input { 
-            border: none; padding: 0; width: 100%; background: transparent; 
-            font-family: inherit; font-size: 0.9rem;
-        }
-        .table-input:focus { 
-            background: #fff; border: 1px solid var(--primary); border-radius: 4px; padding: 4px; 
-            outline: none;
+            max-width: 900px; margin: 0 auto; background: var(--card);
+            padding: 30px 35px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
-        /* Tombol Tambah & Hapus Baris Minimalis */
-        .btn-add-row {
-            background: #fff;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            padding: 4px 12px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: bold;
-            transition: 0.2s;
+        /* HEADER INSTANSI (BPS) */
+        .header-instansi {
+            display: flex; align-items: center; gap: 20px;
+            border-bottom: 3px double #000; padding-bottom: 15px; margin-bottom: 25px;
         }
-        .btn-add-row:hover { background: var(--primary); color: white; }
+        .header-instansi .logo-placeholder {
+            width: 80px; height: 80px; background: #f8f9fa; border: 2px solid #333;
+            display: flex; align-items: center; justify-content: center; font-size: 0.7rem;
+            text-align: center; color: #333; border-radius: 50%;
+        }
+        .header-instansi .text-instansi {
+            flex: 1; text-align: center;
+        }
+        .header-instansi .text-instansi h1 {
+            font-size: 1.5rem; margin: 0; font-weight: bold; text-transform: uppercase;
+        }
+        .header-instansi .text-instansi h2 {
+            font-size: 1.2rem; margin: 0; font-weight: normal;
+        }
+        .header-instansi .text-instansi p {
+            font-size: 0.9rem; margin: 5px 0 0 0; font-style: italic;
+        }
+
+        h3 {
+            border-bottom: 1px solid #000; padding-bottom: 5px; margin-top: 30px; font-size: 1.1rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        h4 { margin-top: 20px; font-size: 1rem; text-align: center; text-decoration: underline; }
+
+        /* INPUT UMUM */
+        .row { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 10px; }
+        .col { flex: 1; min-width: 200px; }
+        label { display: block; font-weight: bold; margin-bottom: 4px; font-size: 0.95rem; }
         
+        input, select, textarea {
+            width: 100%; padding: 8px 10px; border: 1px solid #ced4da; border-radius: 4px;
+            box-sizing: border-box; font-family: inherit; font-size: 0.95rem; background: #fcfcfc;
+        }
+        input:focus, select:focus { outline: 2px solid var(--primary); border-color: transparent; }
+
+        /* STRUKTUR TABEL PERSIS FOTO */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
+        th, td { border: 1px solid #000; padding: 6px 8px; vertical-align: middle; }
+        th { background: #f8f9fa; text-align: center; font-weight: bold; }
+        
+        /* Input di dalam tabel agar rapi */
+        .table-input { 
+            border: none; padding: 4px 0; width: 100%; background: transparent; 
+            border-bottom: 1px dashed #adb5bd; outline: none;
+        }
+        .table-input:focus { border-bottom: 2px solid var(--primary); background: #fff; }
+
+        /* Tombol Fleksibilitas (Tambah baris di tabel) */
+        .btn-table-action {
+            background: #e9ecef; border: 1px solid #adb5bd; padding: 2px 10px;
+            border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: bold;
+        }
+        .btn-table-action:hover { background: #ced4da; }
         .btn-remove-row {
-            background: #fee2e2;
-            color: #dc2626;
-            border: 1px solid #fecaca;
-            border-radius: 4px;
-            padding: 2px 8px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: bold;
+            color: #dc3545; background: #f8d7da; border: 1px solid #f5c6cb;
+            padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem;
         }
-        .btn-remove-row:hover { background: #dc2626; color: white; }
-        
-        .btn-container { text-align: center; margin-top: 40px; }
+
+        /* FITUR KAMERA / FOTO */
+        .section-foto {
+            border: 2px dashed #6c757d; padding: 20px; border-radius: 8px; margin-top: 30px;
+            background: #fcfcfc; text-align: center;
+        }
+        .foto-wrapper {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 15px;
+        }
+        .foto-box {
+            border: 1px solid #dee2e6; padding: 10px; border-radius: 6px; width: 220px; background: white;
+        }
+        .foto-box img {
+            width: 100%; height: 150px; object-fit: cover; border: 1px solid #ced4da;
+            border-radius: 4px; background: #f1f1f1; display: block;
+        }
+        .foto-box input[type="file"] { margin-top: 10px; font-size: 0.8rem; padding: 5px; }
+
         .btn-wa {
-            background-color: #25D366;
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(37, 211, 102, 0.25);
-            transition: transform 0.2s, background 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            background-color: #25D366; color: white; border: none;
+            padding: 15px 30px; font-size: 1.2rem; border-radius: 8px; cursor: pointer;
+            font-weight: bold; margin-top: 30px; width: 100%; transition: 0.3s;
         }
-        .btn-wa:hover { transform: scale(1.02); background-color: #128C7E; }
-        
+        .btn-wa:hover { background-color: #128C7E; transform: scale(1.01); }
+
         @media (max-width: 600px) {
-            .container { padding: 15px; }
-            .row { flex-direction: column; }
+            .container { padding: 15px; } .row { flex-direction: column; }
+            .header-instansi { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>📋 Formulir Data Keluarga</h2>
-    
-    <!-- Header Info -->
-    <div class="row" style="border-bottom: 2px dashed #e5e7eb; padding-bottom: 15px;">
-        <div class="col"><label>Nomor Bangunan</label><input type="text" id="nomor_bangunan"></div>
-        <div class="col"><label>Nomor Urut KK</label><input type="text" id="nomor_kk"></div>
-    </div>
-    <div class="row">
-        <div class="col"><label>Nama Kepala Keluarga</label><input type="text" id="nama_kk" placeholder="Masukkan nama"></div>
-        <div class="col"><label>Nomor Telepon</label><input type="tel" id="telepon" placeholder="08xxxxxxx"></div>
+    <!-- HEADER INSTANSI -->
+    <div class="header-instansi">
+        <div class="logo-placeholder">
+            [LOGO<br>BPS]
+        </div>
+        <div class="text-instansi">
+            <h1>BADAN PUSAT STATISTIK</h1>
+            <h2>KOTA LUBUKLINGGAU</h2>
+            <p>Jl. Garuda No. 1, Lubuklinggau Timur I, Kota Lubuklinggau, Sumatera Selatan</p>
+            <p>📍 31625 | 📞 (0733) 321123</p>
+        </div>
     </div>
 
-    <!-- LIST USAHA (2 Baris Awal, Bisa Ditambah) -->
+    <h2 style="text-align: center; border: none; margin: 0 0 20px 0;">FORMULIR PENDATAAN KELUARGA</h2>
+    
+    <!-- BAGIAN ATAS (Teks) -->
+    <div style="display: flex; justify-content: space-between; gap: 20px; margin-bottom: 20px;">
+        <div style="flex:1;">
+            <label>NOMOR BANGUNAN</label>
+            <input type="text" id="nomor_bangunan" style="border:none; border-bottom:1px dotted #000; border-radius:0; background:none; padding-left:0;">
+        </div>
+        <div style="flex:1;">
+            <label>NOMOR URUT KK</label>
+            <input type="text" id="nomor_kk" style="border:none; border-bottom:1px dotted #000; border-radius:0; background:none; padding-left:0;">
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; gap: 20px; margin-bottom: 20px;">
+        <div style="flex:2;">
+            <label>NAMA KEPALA KELUARGA</label>
+            <input type="text" id="nama_kk" style="border:none; border-bottom:1px dotted #000; border-radius:0; background:none; padding-left:0; width:100%;">
+        </div>
+        <div style="flex:1;">
+            <label>NOMOR TELEPON</label>
+            <input type="tel" id="telepon" style="border:none; border-bottom:1px dotted #000; border-radius:0; background:none; padding-left:0;">
+        </div>
+    </div>
+
+    <!-- 1. LIST USAHA -->
     <h3>
-        <span>🏪 List Usaha Yang Dipunya</span>
-        <button class="btn-add-row" onclick="tambahBaris('usaha')">+ Tambah Usaha</button>
+        LIST USAHA YANG DIPUNYA
+        <button class="btn-table-action" onclick="tambahBaris('usaha')">+ Tambah Usaha</button>
     </h3>
     <table>
-        <thead><tr><th style="width: 30px;">No</th><th>List Usaha</th><th>Sejak Tahun</th><th>Luas Tanah (m²)</th><th style="width: 40px;"></th></tr></thead>
+        <thead><tr><th style="width: 30px;">No</th><th>List Usaha</th><th>Sejak Tahun</th><th>Luas Tanah Untuk Usaha</th><th style="width: 40px;">Aksi</th></tr></thead>
         <tbody id="tbody-usaha">
+            <tr><td>1</td><td><input class="table-input" type="text" name="usaha_nama[]"></td><td><input class="table-input" type="number" name="usaha_tahun[]"></td><td><input class="table-input" type="number" name="usaha_luas[]"></td><td></td></tr>
+            <tr><td>2</td><td><input class="table-input" type="text" name="usaha_nama[]"></td><td><input class="table-input" type="number" name="usaha_tahun[]"></td><td><input class="table-input" type="number" name="usaha_luas[]"></td><td></td></tr>
+        </tbody>
+    </table>
+
+    <!-- 2. ANGGOTA KELUARGA (Menggantikan tabel Pekerjaan di foto, karena lebih logis) -->
+    <h3>
+        DATA ANGGOTA KELUARGA
+        <button class="btn-table-action" onclick="tambahBaris('anggota')">+ Tambah Anggota</button>
+    </h3>
+    <table>
+        <thead><tr><th style="width: 30px;">No</th><th>Nama Lengkap</th><th>Hubungan</th><th>Umur</th><th>Jenis Kelamin</th><th>Pekerjaan</th><th>Gaji/Upah</th><th style="width:40px;">Aksi</th></tr></thead>
+        <tbody id="tbody-anggota">
             <tr>
                 <td>1</td>
-                <td><input class="table-input" type="text" name="usaha_nama[]"></td>
-                <td><input class="table-input" type="number" name="usaha_tahun[]"></td>
-                <td><input class="table-input" type="number" name="usaha_luas[]"></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><input class="table-input" type="text" name="usaha_nama[]"></td>
-                <td><input class="table-input" type="number" name="usaha_tahun[]"></td>
-                <td><input class="table-input" type="number" name="usaha_luas[]"></td>
+                <td><input class="table-input" type="text" name="anggota_nama[]"></td>
+                <td><input class="table-input" type="text" name="anggota_hub[]"></td>
+                <td><input class="table-input" type="number" name="anggota_umur[]"></td>
+                <td><select class="table-input" name="anggota_jk[]"><option value="L">L</option><option value="P">P</option></select></td>
+                <td><input class="table-input" type="text" name="anggota_kerja[]"></td>
+                <td><input class="table-input" type="text" name="anggota_gaji[]"></td>
                 <td></td>
             </tr>
         </tbody>
     </table>
 
-    <!-- PEKERJAAN (3 Baris Awal, Bisa Ditambah) -->
-    <h3>
-        <span>👨‍💼 Data Pekerjaan</span>
-        <button class="btn-add-row" onclick="tambahBaris('pekerjaan')">+ Tambah Pekerjaan</button>
-    </h3>
-    <table>
-        <thead><tr><th style="width: 30px;">No</th><th>Pekerjaan</th><th>Gaji/Upah</th><th style="width: 40px;"></th></tr></thead>
-        <tbody id="tbody-pekerjaan">
-            <tr><td>1</td><td><input class="table-input" type="text" name="pekerjaan_nama[]"></td><td><input class="table-input" type="text" name="pekerjaan_gaji[]"></td><td></td></tr>
-            <tr><td>2</td><td><input class="table-input" type="text" name="pekerjaan_nama[]"></td><td><input class="table-input" type="text" name="pekerjaan_gaji[]"></td><td></td></tr>
-            <tr><td>3</td><td><input class="table-input" type="text" name="pekerjaan_nama[]"></td><td><input class="table-input" type="text" name="pekerjaan_gaji[]"></td><td></td></tr>
-        </tbody>
-    </table>
-
-    <!-- KETERANGAN PERUMAHAN -->
-    <h3>🏠 Keterangan Perumahan</h3>
+    <!-- 3. KETERANGAN PERUMAHAN -->
+    <h3>KETERANGAN PERUMAHAN</h3>
     <table>
         <tr>
-            <th style="width: 40%;">STATUS KEPEMILIKAN BANGUNAN</th>
-            <td colspan="2">
-                <select id="status_kepemilikan" style="border:none; background:transparent; width:100%; outline:none;">
+            <th style="width: 35%;">STATUS KEPEMILIKAN BANGUNAN</th>
+            <td colspan="3">
+                <select id="status_kepemilikan" style="width:100%; border:none; background:transparent; outline:none;">
                     <option value="Milik Sendiri">Milik Sendiri</option>
                     <option value="Bayar Sewa">Bayar Sewa</option>
                     <option value="Bebas Sewa">Bebas Sewa</option>
                 </select>
             </td>
         </tr>
-        <tr><th>Luas Lantai Bangunan</th><td colspan="2"><input class="table-input" type="text" id="luas_lantai"></td></tr>
-        <tr><th>Bahan Lantai</th><td colspan="2"><input class="table-input" type="text" id="bahan_lantai"></td></tr>
-        <tr><th>Bahan Tembok</th><td colspan="2"><input class="table-input" type="text" id="bahan_tembok"></td></tr>
-        <tr><th>Bahan Atap</th><td colspan="2"><input class="table-input" type="text" id="bahan_atap"></td></tr>
-        <tr><th>WC</th><td colspan="2"><input class="table-input" type="text" id="wc"></td></tr>
-        <tr><th>Sumber Air</th><td colspan="2"><input class="table-input" type="text" id="sumber_air"></td></tr>
+        <tr><th>Luas Lantai Bangunan</th><td colspan="3"><input class="table-input" type="text" id="luas_lantai"></td></tr>
+        <tr><th>Bahan Lantai</th><td colspan="3"><input class="table-input" type="text" id="bahan_lantai"></td></tr>
+        <tr><th>Bahan Tembok</th><td colspan="3"><input class="table-input" type="text" id="bahan_tembok"></td></tr>
+        <tr><th>Bahan Atap</th><td colspan="3"><input class="table-input" type="text" id="bahan_atap"></td></tr>
+        <tr><th>WC</th><td colspan="3"><input class="table-input" type="text" id="wc"></td></tr>
+        <tr><th>Sumber Air</th><td colspan="3"><input class="table-input" type="text" id="sumber_air"></td></tr>
         <tr>
             <th>Sumber Penerangan</th>
-            <td colspan="2">
-                <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    <div style="flex:1; min-width:100px;"><input class="table-input" type="text" id="sumber_penerangan" placeholder="Jumlah Ampere"></div>
-                    <div style="flex:1; min-width:100px;"><input class="table-input" type="text" id="id_pelanggan" placeholder="ID Pelanggan"></div>
+            <td colspan="3">
+                <div style="display:flex; gap:10px;">
+                    <div style="flex:1;">Jumlah Ampere : <input class="table-input" type="text" id="ampere" style="width:80%; display:inline; border-bottom:1px solid #999;"></div>
+                    <div style="flex:1;">ID Pelanggan : <input class="table-input" type="text" id="id_pelanggan" style="width:80%; display:inline; border-bottom:1px solid #999;"></div>
                 </div>
             </td>
         </tr>
     </table>
 
-    <!-- DATA PENGELUARAN -->
-    <h3>💰 Data Pengeluaran</h3>
+    <!-- 4. DATA PENGELUARAN -->
+    <h3>DATA PENGELUARAN</h3>
+    <h4 style="margin: 0;">PENGELUARAN MINGGUAN & BULANAN</h4>
     <table>
-        <thead><tr><th style="width: 50%;">PENGELUARAN MINGGUAN</th><th style="width: 50%;">PENGELUARAN BULANAN</th></tr></thead>
+        <thead><tr><th style="width: 25%;">Pengeluaran Mingguan</th><th style="width: 25%;">:</th><th style="width: 25%;">Pengeluaran Bulanan</th><th style="width: 25%;">:</th></tr></thead>
         <tbody>
-            <tr><td>Beras <input class="table-input" type="text" id="beras" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td><td>Listrik <input class="table-input" type="text" id="listrik" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td></tr>
-            <tr><td>Sayur <input class="table-input" type="text" id="sayur" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td><td>Internet <input class="table-input" type="text" id="internet" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td></tr>
-            <tr><td>Bumbu <input class="table-input" type="text" id="bumbu" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td><td>Bensin <input class="table-input" type="text" id="bensin" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td></tr>
-            <tr><td>Rokok <input class="table-input" type="text" id="rokok" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td><td>Gas <input class="table-input" type="text" id="gas" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td></tr>
-            <tr><td>Jajan Anak <input class="table-input" type="text" id="jajan_anak" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td><td>Sabun <input class="table-input" type="text" id="sabun" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td></tr>
-            <tr><td></td><td>SPP <input class="table-input" type="text" id="spp" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td></tr>
-            <tr><td></td><td>Obat <input class="table-input" type="text" id="obat" style="width: 50%; display:inline; border-bottom:1px solid #ccc; margin-left:5px;"></td></tr>
+            <tr><td>BERAS</td><td><input class="table-input" type="text" id="beras"></td><td>LISTRIK</td><td><input class="table-input" type="text" id="listrik"></td></tr>
+            <tr><td>SAYUR</td><td><input class="table-input" type="text" id="sayur"></td><td>INTERNET</td><td><input class="table-input" type="text" id="internet"></td></tr>
+            <tr><td>BUMBU</td><td><input class="table-input" type="text" id="bumbu"></td><td>BENSIN</td><td><input class="table-input" type="text" id="bensin"></td></tr>
+            <tr><td>ROKOK</td><td><input class="table-input" type="text" id="rokok"></td><td>GAS</td><td><input class="table-input" type="text" id="gas"></td></tr>
+            <tr><td>JAJAN ANAK</td><td><input class="table-input" type="text" id="jajan_anak"></td><td>SABUN</td><td><input class="table-input" type="text" id="sabun"></td></tr>
+            <tr><td></td><td></td><td>SPP</td><td><input class="table-input" type="text" id="spp"></td></tr>
+            <tr><td></td><td></td><td>OBAT</td><td><input class="table-input" type="text" id="obat"></td></tr>
         </tbody>
     </table>
 
     <!-- PENGELUARAN TAHUNAN -->
-    <h3>📅 Pengeluaran Tahunan</h3>
+    <h4 style="margin-top: 20px; border-bottom: 1px solid #000; padding-bottom: 5px;">PENGELUARAN TAHUNAN</h4>
     <table>
         <tr><th style="width: 25%;">BPJS</th><td><input class="table-input" type="text" id="bpjs"></td></tr>
-        <tr><th>Pajak Bangunan</th><td><input class="table-input" type="text" id="pajak_bangunan"></td></tr>
-        <tr><th>Pajak Lahan</th><td><input class="table-input" type="text" id="pajak_lahan"></td></tr>
-        <tr><th>Lebaran</th><td><input class="table-input" type="text" id="lebaran"></td></tr>
+        <tr><th>PAJAK BANGUNAN</th><td><input class="table-input" type="text" id="pajak_bangunan"></td></tr>
+        <tr><th>PAJAK LAHAN</th><td><input class="table-input" type="text" id="pajak_lahan"></td></tr>
+        <tr><th>LEBARAN</th><td><input class="table-input" type="text" id="lebaran"></td></tr>
     </table>
 
-    <!-- KEPEMILIKAN ASET (5 Baris Awal, Bisa Ditambah) -->
+    <!-- 5. KEPEMILIKAN ASET -->
     <h3>
-        <span>🚗 Kepemilikan Aset</span>
-        <button class="btn-add-row" onclick="tambahBaris('aset')">+ Tambah Aset</button>
+        KEPEMILIKAN ASET
+        <button class="btn-table-action" onclick="tambahBaris('aset')">+ Tambah Aset</button>
     </h3>
     <table>
-        <thead><tr><th>Nama Aset</th><th style="width: 30%;">Jumlah/Luas</th><th style="width: 30%;">Nilai Aset</th><th style="width: 40px;"></th></tr></thead>
+        <thead><tr><th>NAMA ASET</th><th style="width: 30%;">JUMLAH/LUAS</th><th style="width: 30%;">NILAI ASET</th><th style="width:40px;">Aksi</th></tr></thead>
         <tbody id="tbody-aset">
             <tr><td><input class="table-input" type="text" name="aset_nama[]" value="LAHAN KEBUN"></td><td><input class="table-input" type="text" name="aset_jml[]"></td><td><input class="table-input" type="text" name="aset_nilai[]"></td><td></td></tr>
             <tr><td><input class="table-input" type="text" name="aset_nama[]" value="RUMAH LAINNYA"></td><td><input class="table-input" type="text" name="aset_jml[]"></td><td><input class="table-input" type="text" name="aset_nilai[]"></td><td></td></tr>
@@ -253,24 +265,50 @@
         </tbody>
     </table>
 
-    <!-- Catatan Penting -->
-    <div style="background: #fef2f2; padding: 15px; border-radius: 8px; border-left: 5px solid #ef4444; margin-top: 30px;">
-        <p style="margin: 0; font-weight: bold; color: #991b1b;">⚠️ JANGAN LUPA:</p>
-        <ul style="margin: 10px 0 0 20px; color: #7f1d1d; line-height: 1.6;">
-            <li>Ambil Waktu, Selesai Waktu</li>
-            <li>Geotag (Foto Lokasi)</li>
-            <li>Foto (Dokumentasi)</li>
-            <li>Tanda Tangan</li>
+    <!-- FITUR KAMERA FOTO (Depan Rumah & Ruang Tamu) -->
+    <div class="section-foto">
+        <h3 style="border:none; justify-content: center; margin:0;">📸 DOKUMENTASI FOTO LOKASI</h3>
+        <p style="font-size: 0.9rem; color: #6c757d;">Gunakan perangkat Anda untuk mengambil foto langsung atau unggah dari galeri.</p>
+        <div class="foto-wrapper">
+            <div class="foto-box">
+                <label style="font-weight: bold; margin-bottom: 5px;">Foto Depan Rumah</label>
+                <img id="preview-depan" src="" alt="Preview Depan Rumah">
+                <input type="file" accept="image/*" capture="environment" onchange="previewFoto(this, 'preview-depan')">
+            </div>
+            <div class="foto-box">
+                <label style="font-weight: bold; margin-bottom: 5px;">Foto Ruang Tamu</label>
+                <img id="preview-dalam" src="" alt="Preview Ruang Tamu">
+                <input type="file" accept="image/*" capture="environment" onchange="previewFoto(this, 'preview-dalam')">
+            </div>
+        </div>
+    </div>
+
+    <!-- CATATAN PENTING -->
+    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 5px solid #856404; margin-top: 30px;">
+        <p style="margin: 0; font-weight: bold; color: #856404;">⚠️ JANGAN LUPA PETUGAS:</p>
+        <ul style="margin: 10px 0 0 20px; color: #533f03; line-height: 1.6;">
+            <li>Ambil Waktu, Selesai Waktu (Pastikan waktu saat pendataan)</li>
+            <li>Geotag (Pastikan GPS lokasi menyala)</li>
+            <li>Foto (Dokumentasi sudah diambil)</li>
+            <li>Tanda Tangan (Mintalah tanda tangan responden)</li>
         </ul>
     </div>
 
-    <div class="btn-container">
-        <button class="btn-wa" onclick="kirimKeWhatsApp()">📲 KIRIM DATA KE WHATSAPP</button>
-    </div>
+    <button class="btn-wa" onclick="kirimKeWhatsApp()">📲 KIRIM DATA LENGKAP KE WHATSAPP (BPS)</button>
 </div>
 
 <script>
-    // FUNGSI MENAMBAH BARIS
+    // --- 1. FUNGSI FOTO / KAMERA ---
+    function previewFoto(input, previewId) {
+        let preview = document.getElementById(previewId);
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function(e) { preview.src = e.target.result; }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // --- 2. FUNGSI TAMBAH BARIS TABEL (Fleksibel tapi Struktur Tetap) ---
     function tambahBaris(tipe) {
         let tbody = document.getElementById(`tbody-${tipe}`);
         let rowCount = tbody.rows.length + 1;
@@ -282,27 +320,30 @@
                 <td><input class="table-input" type="text" name="usaha_nama[]"></td>
                 <td><input class="table-input" type="number" name="usaha_tahun[]"></td>
                 <td><input class="table-input" type="number" name="usaha_luas[]"></td>
-                <td><button class="btn-remove-row" onclick="hapusBaris(this)">Hapus</button></td>
+                <td><button class="btn-remove-row" onclick="hapusBaris(this)">✕</button></td>
             `;
-        } else if (tipe === 'pekerjaan') {
+        } else if (tipe === 'anggota') {
             newRow.innerHTML = `
                 <td>${rowCount}</td>
-                <td><input class="table-input" type="text" name="pekerjaan_nama[]"></td>
-                <td><input class="table-input" type="text" name="pekerjaan_gaji[]"></td>
-                <td><button class="btn-remove-row" onclick="hapusBaris(this)">Hapus</button></td>
+                <td><input class="table-input" type="text" name="anggota_nama[]"></td>
+                <td><input class="table-input" type="text" name="anggota_hub[]"></td>
+                <td><input class="table-input" type="number" name="anggota_umur[]"></td>
+                <td><select class="table-input" name="anggota_jk[]"><option value="L">L</option><option value="P">P</option></select></td>
+                <td><input class="table-input" type="text" name="anggota_kerja[]"></td>
+                <td><input class="table-input" type="text" name="anggota_gaji[]"></td>
+                <td><button class="btn-remove-row" onclick="hapusBaris(this)">✕</button></td>
             `;
         } else if (tipe === 'aset') {
             newRow.innerHTML = `
                 <td><input class="table-input" type="text" name="aset_nama[]" placeholder="Nama Aset Baru"></td>
                 <td><input class="table-input" type="text" name="aset_jml[]"></td>
                 <td><input class="table-input" type="text" name="aset_nilai[]"></td>
-                <td><button class="btn-remove-row" onclick="hapusBaris(this)">Hapus</button></td>
+                <td><button class="btn-remove-row" onclick="hapusBaris(this)">✕</button></td>
             `;
         }
         tbody.appendChild(newRow);
     }
 
-    // FUNGSI MENGHAPUS BARIS
     function hapusBaris(btn) {
         let row = btn.parentNode.parentNode;
         let tbody = row.parentNode;
@@ -310,94 +351,79 @@
         updateNomorUrut(tbody);
     }
 
-    // FUNGSI UPDATE NOMOR URUT SETELAH HAPUS (Untuk Usaha & Pekerjaan)
     function updateNomorUrut(tbody) {
         let rows = tbody.rows;
         for (let i = 0; i < rows.length; i++) {
             let cells = rows[i].cells;
-            if (cells.length > 0 && cells[0].innerText !== "Nama Aset") { // Skip jika header aset
-                // Asumsi nomor urut ada di kolom pertama
+            if (cells.length > 0 && tbody.id !== 'tbody-aset') {
                 cells[0].innerText = i + 1;
             }
         }
     }
 
-    // FUNGSI GET VALUE AMAN
-    function getVal(id) {
-        let el = document.getElementById(id);
-        return el ? (el.value.trim() || '-') : '-';
-    }
+    // --- 3. FUNGSI AMBIL DATA ---
+    function getVal(id) { let el = document.getElementById(id); return el ? (el.value.trim() || '-') : '-'; }
 
-    // FUNGSI UTAMA KIRIM WHATSAPP
+    // --- 4. FUNGSI KIRIM WA ---
     function kirimKeWhatsApp() {
-        let message = `*📋 FORMULIR DATA KELUARGA*\n\n`;
-        message += `*Identitas*\n`;
+        let message = `*📋 LAPORAN SURVEI BPS KOTA LUBUKLINGGAU*\n\n`;
+        
+        message += `*🔹 IDENTITAS*\n`;
         message += `Nomor Bangunan: ${getVal('nomor_bangunan')}\n`;
         message += `Nomor KK: ${getVal('nomor_kk')}\n`;
         message += `Nama KK: ${getVal('nama_kk')}\n`;
         message += `Telepon: ${getVal('telepon')}\n\n`;
 
-        // 1. Usaha Dinamis
-        message += `*🏪 Usaha*\n`;
-        let usahaNama = document.getElementsByName('usaha_nama[]');
-        let usahaTahun = document.getElementsByName('usaha_tahun[]');
-        let usahaLuas = document.getElementsByName('usaha_luas[]');
-        for(let i=0; i<usahaNama.length; i++) {
-            let nm = usahaNama[i].value.trim() || '-';
-            let th = usahaTahun[i].value.trim() || '-';
-            let ls = usahaLuas[i].value.trim() || '-';
-            message += `${i+1}. ${nm} (${th} - ${ls}m²)\n`;
+        message += `*🏪 USAHA*\n`;
+        let uNama = document.getElementsByName('usaha_nama[]');
+        let uTahun = document.getElementsByName('usaha_tahun[]');
+        let uLuas = document.getElementsByName('usaha_luas[]');
+        for(let i=0; i<uNama.length; i++) {
+            message += `${i+1}. ${uNama[i].value || '-'} (${uTahun[i].value || '-'} - ${uLuas[i].value || '-'}m²)\n`;
         }
         message += `\n`;
 
-        // 2. Pekerjaan Dinamis
-        message += `*👨‍💼 Pekerjaan*\n`;
-        let pekerjaanNama = document.getElementsByName('pekerjaan_nama[]');
-        let pekerjaanGaji = document.getElementsByName('pekerjaan_gaji[]');
-        for(let i=0; i<pekerjaanNama.length; i++) {
-            let nm = pekerjaanNama[i].value.trim() || '-';
-            let gj = pekerjaanGaji[i].value.trim() || '-';
-            message += `${i+1}. ${nm} - ${gj}\n`;
+        message += `*👨‍👩‍👧‍👦 ANGGOTA KELUARGA*\n`;
+        let aNama = document.getElementsByName('anggota_nama[]');
+        let aHub = document.getElementsByName('anggota_hub[]');
+        let aUmur = document.getElementsByName('anggota_umur[]');
+        let aJk = document.getElementsByName('anggota_jk[]');
+        let aKerja = document.getElementsByName('anggota_kerja[]');
+        let aGaji = document.getElementsByName('anggota_gaji[]');
+        for(let i=0; i<aNama.length; i++) {
+            message += `${i+1}. ${aNama[i].value || '-'} (${aHub[i].value || '-'}, ${aUmur[i].value || '-'}th, ${aJk[i].value || '-'}) - Kerja: ${aKerja[i].value || '-'} (${aGaji[i].value || '-'})\n`;
         }
         message += `\n`;
 
-        // 3. Keterangan Rumah
-        message += `*🏠 Rumah*\n`;
+        message += `*🏠 RUMAH*\n`;
         message += `Status: ${document.getElementById('status_kepemilikan').value}\n`;
         message += `Lantai: ${getVal('luas_lantai')}, Bahan: ${getVal('bahan_lantai')}\n`;
         message += `Tembok: ${getVal('bahan_tembok')}, Atap: ${getVal('bahan_atap')}\n`;
         message += `WC: ${getVal('wc')}, Air: ${getVal('sumber_air')}\n`;
-        message += `Penerangan: ${getVal('sumber_penerangan')} (${getVal('ampere')}, ID: ${getVal('id_pelanggan')})\n\n`;
+        message += `Penerangan: ${getVal('sumber_penerangan')} (${getVal('ampere')}, ${getVal('id_pelanggan')})\n\n`;
 
-        // 4. Pengeluaran
-        message += `*💰 Mingguan*\n`;
+        message += `*💰 MINGGUAN*\n`;
         message += `Beras: ${getVal('beras')}, Sayur: ${getVal('sayur')}, Bumbu: ${getVal('bumbu')}, Rokok: ${getVal('rokok')}, Jajan: ${getVal('jajan_anak')}\n\n`;
-        message += `*💰 Bulanan*\n`;
+        message += `*💰 BULANAN*\n`;
         message += `Listrik: ${getVal('listrik')}, Internet: ${getVal('internet')}, Bensin: ${getVal('bensin')}, Gas: ${getVal('gas')}, Sabun: ${getVal('sabun')}, SPP: ${getVal('spp')}, Obat: ${getVal('obat')}\n\n`;
 
-        // 5. Tahunan
-        message += `*📅 Tahunan*\n`;
+        message += `*📅 TAHUNAN*\n`;
         message += `BPJS: ${getVal('bpjs')}, Pajak Bangunan: ${getVal('pajak_bangunan')}, Pajak Lahan: ${getVal('pajak_lahan')}, Lebaran: ${getVal('lebaran')}\n\n`;
 
-        // 6. Aset Dinamis
-        message += `*🚗 Aset*\n`;
-        let asetNama = document.getElementsByName('aset_nama[]');
-        let asetJml = document.getElementsByName('aset_jml[]');
-        let asetNilai = document.getElementsByName('aset_nilai[]');
-        for(let i=0; i<asetNama.length; i++) {
-            let nm = asetNama[i].value.trim() || '-';
-            let jml = asetJml[i].value.trim() || '-';
-            let nil = asetNilai[i].value.trim() || '-';
-            message += `${nm}: ${jml} - Rp${nil}\n`;
+        message += `*🚗 ASET*\n`;
+        let asNama = document.getElementsByName('aset_nama[]');
+        let asJml = document.getElementsByName('aset_jml[]');
+        let asNilai = document.getElementsByName('aset_nilai[]');
+        for(let i=0; i<asNama.length; i++) {
+            message += `${asNama[i].value || '-'}: ${asJml[i].value || '-'} - Rp${asNilai[i].value || '-'}\n`;
         }
         message += `\n`;
 
-        // 7. Catatan
-        message += `*⚠️ PENTING*\n`;
-        message += `- Ambil Waktu, Selesai Waktu\n`;
-        message += `- Jangan Lupa Geotag\n`;
-        message += `- Jangan Lupa Foto\n`;
-        message += `- Jangan Lupa Tanda Tangan`;
+        message += `*⚠️ CATATAN PETUGAS*\n`;
+        message += `- Waktu Pendataan: Selesai\n`;
+        message += `- Geotag: Sudah\n`;
+        message += `- Dokumentasi Foto: Depan Rumah & Ruang Tamu (TERLAMPIR DI GALERI)\n`;
+        message += `- Tanda Tangan: Sudah`;
 
         const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
