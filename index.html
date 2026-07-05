@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Survey Bangunan</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2, h3 { border-bottom: 2px solid #333; padding-bottom: 5px; margin-top: 30px; }
+        .input-group { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 15px; }
+        .field { flex: 1; min-width: 250px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+        th { background-color: #eee; }
+        
+        /* Upload Foto Styles */
+        .upload-area { border: 2px dashed #ccc; padding: 20px; text-align: center; margin: 10px 0; cursor: pointer; border-radius: 5px; background: #fafafa; }
+        .upload-area:hover { border-color: #333; }
+        .preview-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; }
+        .preview-item { border: 1px solid #ddd; padding: 5px; border-radius: 5px; text-align: center; width: 120px; }
+        .preview-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 3px; }
+        .preview-item p { font-size: 10px; margin: 5px 0; }
+        .btn-remove { background: #ff4444; color: white; border: none; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 10px; }
+
+        button.submit { background-color: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; width: 100%; margin-top: 20px; }
+        button.submit:disabled { background-color: #ccc; cursor: not-allowed; }
+        #loading { display: none; text-align: center; margin-top: 20px; font-weight: bold; color: #333; }
+        #responseMsg { margin-top: 10px; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Data Bangunan</h2>
+    <div class="input-group">
+        <div class="field"><label>Nomor Bangunan</label><input type="text" id="nomor_bangunan"></div>
+        <div class="field"><label>Nomor Urut KK</label><input type="text" id="nomor_urut_kk"></div>
+        <div class="field"><label>Nama Kepala Keluarga</label><input type="text" id="nama_kepala_keluarga"></div>
+        <div class="field"><label>Nomor Telepon</label><input type="text" id="nomor_telepon"></div>
+    </div>
+
+    <h3>Usaha</h3>
+    <table>
+        <thead><tr><th>List Usaha</th><th>Sejak Tahun</th><th>Luas Tanah</th></tr></thead>
+        <tbody>
+            <tr>
+                <td><input type="text" id="usaha_1_nama"></td><td><input type="text" id="usaha_1_tahun"></td><td><input type="text" id="usaha_1_luas"></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="usaha_2_nama"></td><td><input type="text" id="usaha_2_tahun"></td><td><input type="text" id="usaha_2_luas"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Pekerjaan Anggota Keluarga</h3>
+    <table>
+        <thead><tr><th>No Urut Anggota</th><th>Pekerjaan</th><th>Gaji/Upah</th></tr></thead>
+        <tbody>
+            <tr><td><input type="text" id="pekerjaan_1_nama"></td><td><input type="text" id="pekerjaan_1_pekerjaan"></td><td><input type="text" id="pekerjaan_1_gaji"></td></tr>
+            <tr><td><input type="text" id="pekerjaan_2_nama"></td><td><input type="text" id="pekerjaan_2_pekerjaan"></td><td><input type="text" id="pekerjaan_2_gaji"></td></tr>
+            <tr><td><input type="text" id="pekerjaan_3_nama"></td><td><input type="text" id="pekerjaan_3_pekerjaan"></td><td><input type="text" id="pekerjaan_3_gaji"></td></tr>
+        </tbody>
+    </table>
+
+    <h3>Keterangan Perumahan</h3>
+    <table>
+        <tr><th>Status Kepemilikan</th>
+            <td>
+                <select id="status_kepemilikan">
+                    <option value="Milik Sendiri">Milik Sendiri</option>
+                    <option value="Bayar Sewa">Bayar Sewa</option>
+                    <option value="Bebas Sewa">Bebas Sewa</option>
+                </select>
+            </td>
+        </tr>
+        <tr><td>Luas Lantai Bangunan</td><td><input type="text" id="luas_lantai"></td></tr>
+        <tr><td>Bahan Lantai</td><td><input type="text" id="bahan_lantai"></td></tr>
+        <tr><td>Bahan Tembok</td><td><input type="text" id="bahan_tembok"></td></tr>
+        <tr><td>Bahan Atap</td><td><input type="text" id="bahan_atap"></td></tr>
+        <tr><td>WC</td><td><input type="text" id="wc"></td></tr>
+        <tr><td>Sumber Air</td><td><input type="text" id="sumber_air"></td></tr>
+        <tr>
+            <td>Sumber Penerangan</td>
+            <td>
+                <input type="text" id="sumber_penerangan" placeholder="Listrik/Non-Listrik">
+                <br><small>Jumlah Ampere: <input type="text" id="ampere" style="width:50px;"></small>
+                <br><small>ID Pelanggan: <input type="text" id="id_pelanggan" style="width:120px;"></small>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Data Pengeluaran</h3>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div style="flex:1; min-width:250px;">
+            <table>
+                <tr><th colspan="2">Pengeluaran Mingguan</th></tr>
+                <tr><td>Beras</td><td><input type="text" id="beras"></td></tr>
+                <tr><td>Sayur</td><td><input type="text" id="sayur"></td></tr>
+                <tr><td>Bumbu</td><td><input type="text" id="bumbu"></td></tr>
+                <tr><td>Rokok</td><td><input type="text" id="rokok"></td></tr>
+                <tr><td>Jajan Anak</td><td><input type="text" id="jajan_anak"></td></tr>
+            </table>
+        </div>
+        <div style="flex:1; min-width:250px;">
+            <table>
+                <tr><th colspan="2">Pengeluaran Bulanan</th></tr>
+                <tr><td>Listrik</td><td><input type="text" id="listrik"></td></tr>
+                <tr><td>Internet</td><td><input type="text" id="internet"></td></tr>
+                <tr><td>Bensin</td><td><input type="text" id="bensin"></td></tr>
+                <tr><td>Gas</td><td><input type="text" id="gas"></td></tr>
+                <tr><td>Sabun</td><td><input type="text" id="sabun"></td></tr>
+                <tr><td>SPP</td><td><input type="text" id="spp"></td></tr>
+                <tr><td>Obat</td><td><input type="text" id="obat"></td></tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <table>
+        <tr><th colspan="2">Pengeluaran Tahunan</th></tr>
+        <tr><td>BPJS</td><td><input type="text" id="bpjs"></td></tr>
+        <tr><td>Pajak Bangunan</td><td><input type="text" id="pajak_bangunan"></td></tr>
+        <tr><td>Pajak Lahan</td><td><input type="text" id="pajak_lahan"></td></tr>
+        <tr><td>Lebaran</td><td><input type="text" id="lebaran"></td></tr>
+    </table>
+
+    <h3>Kepemilikan Aset</h3>
+    <table>
+        <thead><tr><th>Nama Aset</th><th>Jumlah/Luas</th><th>Nilai Aset</th></tr></thead>
+        <tbody>
+            <tr><td><input type="text" id="aset_1_nama" value="Lahan Kebun"></td><td><input type="text" id="aset_1_jumlah"></td><td><input type="text" id="aset_1_nilai"></td></tr>
+            <tr><td><input type="text" id="aset_2_nama" value="Rumah Lainnya"></td><td><input type="text" id="aset_2_jumlah"></td><td><input type="text" id="aset_2_nilai"></td></tr>
+            <tr><td><input type="text" id="aset_3_nama" value="Tabung Gas"></td><td><input type="text" id="aset_3_jumlah"></td><td><input type="text" id="aset_3_nilai"></td></tr>
+            <tr><td><input type="text" id="aset_4_nama" value="Kulkas"></td><td><input type="text" id="aset_4_jumlah"></td><td><input type="text" id="aset_4_nilai"></td></tr>
+            <tr><td><input type="text" id="aset_5_nama" value="AC"></td><td><input type="text" id="aset_5_jumlah"></td><td><input type="text" id="aset_5_nilai"></td></tr>
+            <tr><td><input type="text" id="aset_6_nama" value="Emas"></td><td><input type="text" id="aset_6_jumlah"></td><td><input type="text" id="aset_6_nilai"></td></tr>
+            <tr><td><input type="text" id="aset_7_nama" value="Komputer"></td><td><input type="text" id="aset_7_jumlah"></td><td><input type="text" id="aset_7_nilai"></td></tr>
+            <tr><td><input type="text" id="aset_8_nama" value="Motor"></td><td><input type="text" id="aset_8_jumlah"></td><td><input type="text" id="aset_8_nilai"></td></tr>
+            <tr><td><input type="text" id="aset_9_nama" value="Mobil"></td><td><input type="text" id="aset_9_jumlah"></td><td><input type="text" id="aset_9_nilai"></td></tr>
+        </tbody>
+    </table>
+
+    <h3>Upload Foto</h3>
+    <p style="font-size: 14px; color: #555;">Silakan upload foto KK, foto Rumah, dan foto lainnya.</p>
+    
+    <!-- Foto KK -->
+    <div class="upload-area" id="drop-area-kk" onclick="document.getElementById('fileInput-kk').click()">
+        <strong>Klik atau Drag & Drop Foto KK di sini</strong><br>
+        <input type="file" id="fileInput-kk" accept="image/*" multiple style="display:none;">
+    </div>
+    <div class="preview-container" id="preview-kk"></div>
+
+    <!-- Foto Rumah -->
+    <div class="upload-area" id="drop-area-rumah" onclick="document.getElementById('fileInput-rumah').click()">
+        <strong>Klik atau Drag & Drop Foto Rumah di sini</strong><br>
+        <input type="file" id="fileInput-rumah" accept="image/*" multiple style="display:none;">
+    </div>
+    <div class="preview-container" id="preview-rumah"></div>
+
+    <!-- Foto Lainnya -->
+    <div class="upload-area" id="drop-area-lain" onclick="document.getElementById('fileInput-lain').click()">
+        <strong>Klik atau Drag & Drop Foto Lainnya di sini</strong><br>
+        <input type="file" id="fileInput-lain" accept="image/*" multiple style="display:none;">
+    </div>
+    <div class="preview-container" id="preview-lain"></div>
+
+
+    <button class="submit" id="submitBtn" onclick="submitForm()">Simpan Data & Foto</button>
+    <div id="loading">Mengirim data... Mohon tunggu (foto sedang diupload ke Drive)</div>
+    <div id="responseMsg"></div>
+</div>
+
+<script>
+    // ================= UPLOAD LOGIC =================
+    let uploadedFiles = [];
+
+    function setupUpload(inputId, previewId, category) {
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewId);
+
+        input.addEventListener('change', function(e) {
+            handleFiles(this.files, preview, category);
+            this.value = ''; // reset input
+        });
+
+        // Drag and Drop
+        const dropArea = document.getElementById('drop-area-' + category);
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+        function preventDefaults (e) { e.preventDefault(); e.stopPropagation(); }
+
+        dropArea.addEventListener('drop', function(e) {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+            handleFiles(files, preview, category);
+        });
+    }
+
+    function handleFiles(files, preview, category) {
+        Array.from(files).forEach(file => {
+            if (!file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64 = e.target.result;
+                const fileObj = {
+                    namaFile: file.name,
+                    mimeType: file.type,
+                    base64: base64,
+                    keterangan: category // KK, Rumah, atau Lainnya
+                };
+                uploadedFiles.push(fileObj);
+
+                // Show preview
+                const div = document.createElement('div');
+                div.className = 'preview-item';
+                div.innerHTML = `
+                    <img src="${base64}" alt="preview">
+                    <p>${file.name}</p>
+                    <button class="btn-remove" onclick="removeFile(this, '${base64}')">Hapus</button>
+                `;
+                preview.appendChild(div);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function removeFile(btn, base64) {
+        // Hapus dari array
+        uploadedFiles = uploadedFiles.filter(f => f.base64 !== base64);
+        // Hapus dari DOM
+        btn.parentElement.remove();
+    }
+
+    // Init uploads
+    setupUpload('fileInput-kk', 'preview-kk', 'KK');
+    setupUpload('fileInput-rumah', 'preview-rumah', 'Rumah');
+    setupUpload('fileInput-lain', 'preview-lain', 'Lainnya');
+
+
+    // ================= SUBMIT LOGIC =================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycAfsy3SE7Jfno7EepxIwCbBtD_THzCn7is1mjXW7UTQB53X4DfV9r3nz7jvuVjMF0mA/exec"; // GANTI INI DENGAN URL WEB APP ANDA DARI GOOGLE APPS SCRIPT
+
+    function submitForm() {
+        const btn = document.getElementById('submitBtn');
+        const loading = document.getElementById('loading');
+        const msg = document.getElementById('responseMsg');
+        
+        btn.disabled = true;
+        loading.style.display = 'block';
+        msg.innerHTML = '';
+
+        // Kumpulkan semua data
+        const data = {
+            nomor_bangunan: document.getElementById('nomor_bangunan').value,
+            nomor_urut_kk: document.getElementById('nomor_urut_kk').value,
+            nama_kepala_keluarga: document.getElementById('nama_kepala_keluarga').value,
+            nomor_telepon: document.getElementById('nomor_telepon').value,
+            usaha_1_nama: document.getElementById('usaha_1_nama').value,
+            usaha_1_tahun: document.getElementById('usaha_1_tahun').value,
+            usaha_1_luas: document.getElementById('usaha_1_luas').value,
+            usaha_2_nama: document.getElementById('usaha_2_nama').value,
+            usaha_2_tahun: document.getElementById('usaha_2_tahun').value,
+            usaha_2_luas: document.getElementById('usaha_2_luas').value,
+            pekerjaan_1_nama: document.getElementById('pekerjaan_1_nama').value,
+            pekerjaan_1_pekerjaan: document.getElementById('pekerjaan_1_pekerjaan').value,
+            pekerjaan_1_gaji: document.getElementById('pekerjaan_1_gaji').value,
+            pekerjaan_2_nama: document.getElementById('pekerjaan_2_nama').value,
+            pekerjaan_2_pekerjaan: document.getElementById('pekerjaan_2_pekerjaan').value,
+            pekerjaan_2_gaji: document.getElementById('pekerjaan_2_gaji').value,
+            pekerjaan_3_nama: document.getElementById('pekerjaan_3_nama').value,
+            pekerjaan_3_pekerjaan: document.getElementById('pekerjaan_3_pekerjaan').value,
+            pekerjaan_3_gaji: document.getElementById('pekerjaan_3_gaji').value,
+            status_kepemilikan: document.getElementById('status_kepemilikan').value,
+            luas_lantai: document.getElementById('luas_lantai').value,
+            bahan_lantai: document.getElementById('bahan_lantai').value,
+            bahan_tembok: document.getElementById('bahan_tembok').value,
+            bahan_atap: document.getElementById('bahan_atap').value,
+            wc: document.getElementById('wc').value,
+            sumber_air: document.getElementById('sumber_air').value,
+            sumber_penerangan: document.getElementById('sumber_penerangan').value,
+            ampere: document.getElementById('ampere').value,
+            id_pelanggan: document.getElementById('id_pelanggan').value,
+            beras: document.getElementById('beras').value,
+            sayur: document.getElementById('sayur').value,
+            bumbu: document.getElementById('bumbu').value,
+            rokok: document.getElementById('rokok').value,
+            jajan_anak: document.getElementById('jajan_anak').value,
+            listrik: document.getElementById('listrik').value,
+            internet: document.getElementById('internet').value,
+            bensin: document.getElementById('bensin').value,
+            gas: document.getElementById('gas').value,
+            sabun: document.getElementById('sabun').value,
+            spp: document.getElementById('spp').value,
+            obat: document.getElementById('obat').value,
+            bpjs: document.getElementById('bpjs').value,
+            pajak_bangunan: document.getElementById('pajak_bangunan').value,
+            pajak_lahan: document.getElementById('pajak_lahan').value,
+            lebaran: document.getElementById('lebaran').value,
+            aset_1_nama: document.getElementById('aset_1_nama').value, aset_1_jumlah: document.getElementById('aset_1_jumlah').value, aset_1_nilai: document.getElementById('aset_1_nilai').value,
+            aset_2_nama: document.getElementById('aset_2_nama').value, aset_2_jumlah: document.getElementById('aset_2_jumlah').value, aset_2_nilai: document.getElementById('aset_2_nilai').value,
+            aset_3_nama: document.getElementById('aset_3_nama').value, aset_3_jumlah: document.getElementById('aset_3_jumlah').value, aset_3_nilai: document.getElementById('aset_3_nilai').value,
+            aset_4_nama: document.getElementById('aset_4_nama').value, aset_4_jumlah: document.getElementById('aset_4_jumlah').value, aset_4_nilai: document.getElementById('aset_4_nilai').value,
+            aset_5_nama: document.getElementById('aset_5_nama').value, aset_5_jumlah: document.getElementById('aset_5_jumlah').value, aset_5_nilai: document.getElementById('aset_5_nilai').value,
+            aset_6_nama: document.getElementById('aset_6_nama').value, aset_6_jumlah: document.getElementById('aset_6_jumlah').value, aset_6_nilai: document.getElementById('aset_6_nilai').value,
+            aset_7_nama: document.getElementById('aset_7_nama').value, aset_7_jumlah: document.getElementById('aset_7_jumlah').value, aset_7_nilai: document.getElementById('aset_7_nilai').value,
+            aset_8_nama: document.getElementById('aset_8_nama').value, aset_8_jumlah: document.getElementById('aset_8_jumlah').value, aset_8_nilai: document.getElementById('aset_8_nilai').value,
+            aset_9_nama: document.getElementById('aset_9_nama').value, aset_9_jumlah: document.getElementById('aset_9_jumlah').value, aset_9_nilai: document.getElementById('aset_9_nilai').value,
+            fotos: uploadedFiles,
+            timestamp: new Date().toLocaleString()
+        };
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Penting untuk CORS di Google Apps Script
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            // Karena mode no-cors, response tidak bisa dibaca textnya dengan mudah, tapi kita anggap sukses jika tidak error network.
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('responseMsg').style.color = 'green';
+            document.getElementById('responseMsg').innerHTML = "Data dan foto berhasil dikirim ke Google Spreadsheet & Google Drive!";
+            document.getElementById('submitBtn').disabled = false;
+            // Reset form
+            document.querySelectorAll('input').forEach(i => i.value = '');
+            uploadedFiles = [];
+            document.querySelectorAll('.preview-item').forEach(el => el.remove());
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('responseMsg').style.color = 'red';
+            document.getElementById('responseMsg').innerHTML = "Terjadi kesalahan saat mengirim data: " + error;
+            document.getElementById('submitBtn').disabled = false;
+        });
+    }
+</script>
+
+</body>
+</html>
